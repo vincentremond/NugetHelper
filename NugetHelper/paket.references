@@ -1,0 +1,6 @@
+FSharp.Core
+Fargo.CmdLine
+Pinicola.FSharp
+Spectre.Console
+Fake.Core
+Fake.Core.Process

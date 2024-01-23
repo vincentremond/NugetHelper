@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NugetHelper", "NugetHelper\NugetHelper.fsproj", "{B9BA87AD-FB03-4E15-A443-A472066A018F}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NugetHelper.Tests", "NugetHelper.Tests\NugetHelper.Tests.fsproj", "{2AD78B54-DA0F-48AC-BB34-5D8BDDAE50E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{E9466853-7460-466D-B8EB-E5256E5451B9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+		README.md = README.md
+		build.cmd = build.cmd
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9BA87AD-FB03-4E15-A443-A472066A018F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BA87AD-FB03-4E15-A443-A472066A018F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BA87AD-FB03-4E15-A443-A472066A018F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BA87AD-FB03-4E15-A443-A472066A018F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AD78B54-DA0F-48AC-BB34-5D8BDDAE50E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AD78B54-DA0F-48AC-BB34-5D8BDDAE50E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AD78B54-DA0F-48AC-BB34-5D8BDDAE50E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AD78B54-DA0F-48AC-BB34-5D8BDDAE50E8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

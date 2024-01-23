@@ -1,0 +1,23 @@
+# paket.dependencies
+
+source ~/nuget
+source https://api.nuget.org/v3/index.json
+
+storage: none
+nuget FSharp.Core
+nuget Fargo.CmdLine
+nuget Pinicola.FSharp
+nuget Spectre.Console
+nuget Fake.Core
+nuget Fake.Core.Process
+
+group Tests
+
+storage: none
+source https://api.nuget.org/v3/index.json
+nuget coverlet.collector
+nuget FSharp.Core
+nuget Microsoft.NET.Test.Sdk
+nuget NUnit
+nuget NUnit.Analyzers
+nuget NUnit3TestAdapter
