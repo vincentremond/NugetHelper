@@ -7,9 +7,11 @@ storage: none
 nuget FSharp.Core
 nuget Fargo.CmdLine
 nuget Pinicola.FSharp
+nuget Pinicola.FSharp.SpectreConsole
 nuget Spectre.Console
 nuget Fake.Core
 nuget Fake.Core.Process
+nuget FsToolkit.ErrorHandling
 
 group Tests
 

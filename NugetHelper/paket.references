@@ -4,3 +4,5 @@ Pinicola.FSharp
 Spectre.Console
 Fake.Core
 Fake.Core.Process
+Pinicola.FSharp.SpectreConsole
+FsToolkit.ErrorHandling
