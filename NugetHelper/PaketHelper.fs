@@ -28,7 +28,13 @@ module PaketHelper =
                 CreateProcess.fromCommand command |> CreateProcess.redirectOutput |> Proc.run
 
             match processResult with
-            | { ExitCode = 0 ; Result = { Output = output ; Error = error  } } when String.isNullOrEmpty error && (not (output.Contains(" could not retrieve "))) ->
+            | {
+                  ExitCode = 0
+                  Result = {
+                               Output = output
+                               Error = error
+                           }
+              } when String.isNullOrEmpty error && (not (output.Contains(" could not retrieve "))) ->
                 output
                 |> (fun s ->
                     s.Split(
@@ -40,7 +46,9 @@ module PaketHelper =
                     )
                     |> Array.toList
                 )
-            | _ -> failwithf $"Paket command failed with exit code %d{processResult.ExitCode}\n{processResult.Result.Error}"
+            | _ ->
+                failwithf
+                    $"Paket command failed with exit code %d{processResult.ExitCode}\n{processResult.Result.Error}"
 
         let findPackages packageName =
             execPaket "find-packages" [
