@@ -30,10 +30,10 @@ FargoCmdLine.run
             | Some packageId -> packageId
             | None -> AnsiConsole.ask "Enter the package name: "
 
-        let add =
+        let addFunc =
             match command with
             | Paket -> PaketHelper.addNugetPackage
             | Nuget -> NugetHelper.addNugetPackage
 
-        add packageName exact
+        addFunc packageName exact
     )

@@ -1,7 +1,6 @@
 ﻿namespace NugetHelper
 
 open System
-open System.IO
 open Fake.Core
 open Pinicola.FSharp.SpectreConsole
 open FsToolkit.ErrorHandling
@@ -48,6 +47,26 @@ module PaketHelper =
                 )
             | _ -> failwithf $"Paket command failed with exit code %d{processResult.ExitCode}\n{processResult.Result.Error}"
 
+        let private execPaketWithOutput command args onStdOut onStdErr =
+
+            let arguments =
+                Arguments.ofList (
+                    [
+                        "paket"
+                        command
+                    ]
+                    @ args
+                )
+
+            let command = Command.RawCommand("dotnet", arguments)
+
+            CreateProcess.fromCommand command
+            |> CreateProcess.redirectOutput
+            |> CreateProcess.withOutputEvents onStdOut onStdErr
+            |> CreateProcess.ensureExitCode
+            |> Proc.run
+            |> ignore
+
         let findPackages packageName =
             execPaket "find-packages" [
                 packageName
@@ -68,26 +87,36 @@ module PaketHelper =
 
         let showGroups () = execPaket "show-groups" [ "--silent" ]
 
-        let add packageId (version: string option) group project =
+        let add packageId group project =
             AnsiConsole.status ()
             |> Status.run
-                $"Adding [yellow]{packageId}[/] with version [yellow]{version}[/] in group [yellow]{group}[/] for project [yellow]{project}[/]"
+                $"Adding [yellow]{packageId}[/] in group [yellow]{group}[/] for project [yellow]{project}[/]"
                 (fun _ ->
-                    let output =
-                        execPaket "add" [
-                            yield packageId
-                            match version with
-                            | Some v ->
-                                yield "--version"
-                                yield v
-                            | None -> ()
-                            yield "--group"
-                            yield group
-                            yield "--project"
-                            yield project
-                        ]
 
-                    output |> List.iter AnsiConsole.WriteLine
+                    let consoleLock = Object()
+
+                    let writeToConsole color =
+                        fun (s: string) ->
+                            match s |> Option.ofObj with
+                            | Some s -> lock consoleLock (fun _ -> AnsiConsole.markupLineInterpolated $"[{color}]{s}[/]")
+                            | None -> ()
+
+                    AnsiConsole.Write(Rule())
+
+                    execPaketWithOutput
+                        "add"
+                        [
+                            packageId
+                            "--group"
+                            group
+                            "--project"
+                            project
+                        ]
+                        (writeToConsole "grey")
+                        (writeToConsole "red")
+
+                    AnsiConsole.Write(Rule())
+
                 )
 
     let addNugetPackage packageName exact =
@@ -107,13 +136,11 @@ module PaketHelper =
 
                 return {|
                     PackageId = selectedPackage
-                    Version = None
                     Group = selectedGroup
                     Project = selectedProject
-
                 |}
             }
 
         match selected with
-        | Ok s -> PaketCmd.add s.PackageId s.Version s.Group s.Project
+        | Ok s -> PaketCmd.add s.PackageId s.Group s.Project
         | Error err -> AnsiConsole.markupLine $"[red]{err}[/]"
