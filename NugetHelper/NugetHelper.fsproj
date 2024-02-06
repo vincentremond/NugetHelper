@@ -8,8 +8,13 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="paket.references" />
+    <Compile Include="Common.fs" />
+    <Compile Include="NugetHelper.fs" />
     <Compile Include="PaketHelper.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NuGet.Protocol" Version="6.8.0" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
