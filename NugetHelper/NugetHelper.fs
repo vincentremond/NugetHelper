@@ -20,7 +20,9 @@ module NugetHelper =
                 let repository = Repository.Factory.GetCoreV3(source)
                 let! searchResource = repository.GetResourceAsync<PackageSearchResource>()
                 let searchFilter = SearchFilter(true)
+
                 let! results = searchResource.SearchAsync(packageName, searchFilter, 0, 10, NullLogger.Instance, CancellationToken.None)
+
                 return results |> Seq.map (_.Identity.Id) |> Seq.toList
             }
 
@@ -30,28 +32,38 @@ module NugetHelper =
                 $"Adding [yellow]{packageId}[/] for project [yellow]{project}[/]"
                 (fun _ ->
 
-                    let arguments =
-                        Arguments.ofList [
-                            "add"
-                            project
-                            "package"
-                            packageId
-                        ]
+                    try
 
-                    let command = Command.RawCommand("dotnet", arguments)
+                        let ruleStyle =
+                            StyleBuilder.default_
+                            |> StyleBuilder.withForeground (Color.Grey)
+                            |> StyleBuilder.build
 
-                    let processResult =
-                        CreateProcess.fromCommand command |> CreateProcess.redirectOutput |> Proc.run
+                        let rule = Rule.init () |> Rule.setStyle ruleStyle
 
-                    match processResult with
-                    | {
-                          ExitCode = 0
-                          Result = { Output = output }
-                      } -> Ok output
-                    | {
-                          ExitCode = _
-                          Result = { Error = error }
-                      } -> Error error
+                        AnsiConsole.Write rule
+
+                        Command.RawCommand(
+                            "dotnet",
+                            Arguments.ofList [
+                                "add"
+                                project
+                                "package"
+                                packageId
+                            ]
+                        )
+                        |> CreateProcess.fromCommand
+                        |> CreateProcess.redirectOutput
+                        |> CreateProcess.withOutputEvents (Common.writeToConsole "grey") (Common.writeToConsole "red")
+                        |> CreateProcess.ensureExitCode
+                        |> Proc.run
+                        |> ignore
+
+                        AnsiConsole.Write rule
+
+                        Ok()
+                    with ex ->
+                        Error ex.Message
                 )
 
     let addNugetPackage packageName exact =
@@ -75,9 +87,8 @@ module NugetHelper =
             result {
                 let! selected = selected
 
-                let! installResult = NugetCmd.add selected.PackageId selected.Project
+                do! NugetCmd.add selected.PackageId selected.Project
                 AnsiConsole.markupLine $"Installed : [green]{selected.PackageId}[/]"
-                AnsiConsole.WriteLine(installResult)
                 return ()
             }
 

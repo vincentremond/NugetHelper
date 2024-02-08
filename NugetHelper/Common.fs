@@ -1,5 +1,6 @@
 ﻿namespace NugetHelper
 
+open System
 open System.IO
 open Pinicola.FSharp.SpectreConsole
 
@@ -10,6 +11,14 @@ module Common =
         Directory.GetFiles(".", @"*.?sproj", SearchOption.AllDirectories)
         |> Seq.map (fun path -> Path.GetRelativePath(".", path))
         |> Seq.toList
+
+    let private consoleLock = Object()
+
+    let writeToConsole color =
+        fun (s: string) ->
+            match s |> Option.ofObj with
+            | Some s -> lock consoleLock (fun _ -> AnsiConsole.markupLineInterpolated $"[{color}]{s}[/]")
+            | None -> ()
 
     let select what whatPlural search =
 

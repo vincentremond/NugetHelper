@@ -93,15 +93,14 @@ module PaketHelper =
                 $"Adding [yellow]{packageId}[/] in group [yellow]{group}[/] for project [yellow]{project}[/]"
                 (fun _ ->
 
-                    let consoleLock = Object()
+                    let ruleStyle =
+                        StyleBuilder.default_
+                        |> StyleBuilder.withForeground (Color.Grey)
+                        |> StyleBuilder.build
 
-                    let writeToConsole color =
-                        fun (s: string) ->
-                            match s |> Option.ofObj with
-                            | Some s -> lock consoleLock (fun _ -> AnsiConsole.markupLineInterpolated $"[{color}]{s}[/]")
-                            | None -> ()
+                    let rule = Rule.init () |> Rule.setStyle ruleStyle
 
-                    AnsiConsole.Write(Rule())
+                    AnsiConsole.Write rule
 
                     execPaketWithOutput
                         "add"
@@ -115,7 +114,7 @@ module PaketHelper =
                         (writeToConsole "grey")
                         (writeToConsole "red")
 
-                    AnsiConsole.Write(Rule())
+                    AnsiConsole.Write rule
 
                 )
 
@@ -128,8 +127,6 @@ module PaketHelper =
                     match exact with
                     | true -> Ok packageName
                     | false -> select "package" "packages" (fun _ -> PaketCmd.findPackages packageName)
-
-                // let! selectedVersion = select "version" "versions" (fun () -> PaketCmd.findPackageVersions selectedPackage)
 
                 let! selectedGroup = select "group" "groups" PaketCmd.showGroups
                 let! selectedProject = select "project" "projects" searchProjects
