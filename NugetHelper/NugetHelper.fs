@@ -21,7 +21,15 @@ module NugetHelper =
                 let! searchResource = repository.GetResourceAsync<PackageSearchResource>()
                 let searchFilter = SearchFilter(true)
 
-                let! results = searchResource.SearchAsync(packageName, searchFilter, 0, 10, NullLogger.Instance, CancellationToken.None)
+                let! results =
+                    searchResource.SearchAsync(
+                        packageName,
+                        searchFilter,
+                        0,
+                        10,
+                        NullLogger.Instance,
+                        CancellationToken.None
+                    )
 
                 return results |> Seq.map (_.Identity.Id) |> Seq.toList
             }
@@ -73,7 +81,11 @@ module NugetHelper =
                 let! selectedPackage =
                     match exact with
                     | true -> Ok packageName
-                    | false -> select "package" "packages" (fun _ -> (NugetCmd.findPackages packageName) |> Async.AwaitTask |> Async.RunSynchronously)
+                    | false ->
+                        select
+                            "package"
+                            "packages"
+                            (fun _ -> (NugetCmd.findPackages packageName) |> Async.AwaitTask |> Async.RunSynchronously)
 
                 let! selectedProject = select "project" "projects" searchProjects
 

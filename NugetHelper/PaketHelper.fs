@@ -45,7 +45,9 @@ module PaketHelper =
                     )
                     |> Array.toList
                 )
-            | _ -> failwithf $"Paket command failed with exit code %d{processResult.ExitCode}\n{processResult.Result.Error}"
+            | _ ->
+                failwithf
+                    $"Paket command failed with exit code %d{processResult.ExitCode}\n{processResult.Result.Error}"
 
         let private execPaketWithOutput command args onStdOut onStdErr =
 

@@ -12,6 +12,7 @@ nuget Spectre.Console
 nuget Fake.Core
 nuget Fake.Core.Process
 nuget FsToolkit.ErrorHandling
+nuget NuGet.Protocol
 
 group Tests
 
