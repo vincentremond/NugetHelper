@@ -111,7 +111,7 @@ GROUP Tests
 STORAGE: NONE
 NUGET
   remote: https://api.nuget.org/v3/index.json
-    coverlet.collector (6.0.2)
+    coverlet.collector (6.0.3)
     FSharp.Core (9.0.100)
     Microsoft.CodeCoverage (17.12) - restriction: || (>= net462) (>= netcoreapp3.1)
     Microsoft.NET.Test.Sdk (17.12)
@@ -123,7 +123,7 @@ NUGET
       Microsoft.TestPlatform.ObjectModel (>= 17.12) - restriction: >= netcoreapp3.1
       Newtonsoft.Json (>= 13.0.1) - restriction: >= netcoreapp3.1
     Newtonsoft.Json (13.0.3) - restriction: >= netcoreapp3.1
-    NUnit (4.3.1)
+    NUnit (4.3.2)
       System.Memory (>= 4.6) - restriction: >= net462
       System.Threading.Tasks.Extensions (>= 4.5.4) - restriction: >= net462
       System.ValueTuple (>= 4.5) - restriction: >= net462

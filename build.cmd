@@ -3,4 +3,4 @@
 dotnet tool restore
 dotnet build -- %*
 
-add-to-path .\NugetHelper\bin\Debug\
+AddToPath .\NugetHelper\bin\Debug\

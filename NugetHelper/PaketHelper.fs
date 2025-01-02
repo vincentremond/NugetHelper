@@ -100,9 +100,9 @@ module PaketHelper =
                         |> StyleBuilder.withForeground (Color.Grey)
                         |> StyleBuilder.build
 
-                    let rule = Rule.init () |> Rule.setStyle ruleStyle
+                    let rule = Rule.initBlank () |> Rule.withStyle ruleStyle
 
-                    AnsiConsole.Write rule
+                    AnsiConsole.write rule
 
                     execPaketWithOutput
                         "add"

@@ -7,8 +7,8 @@ open NuGet.Common
 open NuGet.Configuration
 open NuGet.Protocol
 open NuGet.Protocol.Core.Types
-open Pinicola.FSharp.SpectreConsole
 open Spectre.Console
+open Pinicola.FSharp.SpectreConsole
 
 module NugetHelper =
 
@@ -47,9 +47,9 @@ module NugetHelper =
                             |> StyleBuilder.withForeground (Color.Grey)
                             |> StyleBuilder.build
 
-                        let rule = Rule.init () |> Rule.setStyle ruleStyle
+                        let rule = () |> Rule.initBlank |> Rule.withStyle ruleStyle
 
-                        AnsiConsole.Write rule
+                        AnsiConsole.write rule
 
                         Command.RawCommand(
                             "dotnet",
@@ -67,7 +67,7 @@ module NugetHelper =
                         |> Proc.run
                         |> ignore
 
-                        AnsiConsole.Write rule
+                        AnsiConsole.write rule
 
                         Ok()
                     with ex ->

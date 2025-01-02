@@ -36,7 +36,7 @@ module Common =
 
             let selectedOption =
                 SelectionPrompt.init ()
-                |> SelectionPrompt.setTitle $"Found {options.Length} {whatPlural} :"
+                |> SelectionPrompt.withTitle $"Found {options.Length} {whatPlural} :"
                 |> SelectionPrompt.addChoices options
                 |> AnsiConsole.prompt
 
