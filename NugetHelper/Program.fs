@@ -1,7 +1,7 @@
 ﻿open Fargo
 open Fargo.Operators
 open NugetHelper
-open Pinicola.FSharp
+open Pinicola.FSharp.Fargo
 open Pinicola.FSharp.SpectreConsole
 
 type Command =
