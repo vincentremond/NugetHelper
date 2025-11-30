@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{E94668
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
 		README.md = README.md
-		build.cmd = build.cmd
+		build.ps1 = build.ps1
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Pinicola.FSharp", "Pinicola.FSharp\Pinicola.FSharp\Pinicola.FSharp.fsproj", "{0E56CCA0-C817-4627-A23E-475EC0BAE2A5}"
