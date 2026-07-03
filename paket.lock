@@ -59,11 +59,11 @@ NUGET
       NuGet.Packaging (>= 7.6) - restriction: || (>= net472) (>= net8.0)
       System.Text.Json (>= 8.0.5) - restriction: >= net472
     NuGet.Versioning (7.6) - restriction: || (>= net472) (>= net8.0)
-    Spectre.Console (0.57.1)
+    Spectre.Console (0.57.2)
       Microsoft.Bcl.TimeProvider (>= 10.0.8) - restriction: && (< net8.0) (>= netstandard2.0)
-      Spectre.Console.Ansi (>= 0.57.1) - restriction: >= netstandard2.0
+      Spectre.Console.Ansi (>= 0.57.2) - restriction: >= netstandard2.0
       System.Memory (>= 4.6.3) - restriction: && (< net8.0) (>= netstandard2.0)
-    Spectre.Console.Ansi (0.57.1) - restriction: >= netstandard2.0
+    Spectre.Console.Ansi (0.57.2) - restriction: >= netstandard2.0
     System.Buffers (4.6.1) - restriction: || (&& (>= net462) (>= netstandard2.0)) (>= net472) (&& (< netcoreapp2.1) (>= netstandard2.0) (< netstandard2.1))
     System.Collections.Immutable (10.0.9) - restriction: >= netstandard2.0
       System.Memory (>= 4.6.3) - restriction: || (>= net462) (&& (< net8.0) (>= netstandard2.0))
