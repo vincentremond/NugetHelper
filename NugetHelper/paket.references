@@ -5,3 +5,5 @@ Fake.Core
 Fake.Core.Process
 FsToolkit.ErrorHandling
 NuGet.Protocol
+Pinicola.FSharp.SpectreConsole
+Pinicola.FSharp

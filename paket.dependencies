@@ -3,6 +3,8 @@
 source https://api.nuget.org/v3/index.json
 
 storage: none
+git https://github.com/vincentremond/Pinicola.FSharp.git main build: "dotnet pack -o nupkg", Packages: /nupkg/
+
 nuget FSharp.Core
 nuget Fargo.CmdLine
 nuget Spectre.Console
@@ -11,6 +13,8 @@ nuget Fake.Core.Process
 nuget FsToolkit.ErrorHandling
 nuget NuGet.Protocol
 
+nuget Pinicola.FSharp
+nuget Pinicola.FSharp.SpectreConsole
 group Tests
 
 storage: none
